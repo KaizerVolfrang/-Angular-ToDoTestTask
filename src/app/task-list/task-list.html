@@ -1,0 +1,31 @@
+<h2>Список задач</h2>
+
+<form (ngSubmit)="addTask()">
+  <input
+    type="text"
+    [(ngModel)]="newTaskTitle"
+    name="title"
+    placeholder="Название задачи"
+    required
+  />
+  <input
+    type="text"
+    [(ngModel)]="newTaskDescription"
+    name="description"
+    placeholder="Описание (необязательно)"
+  />
+  <button type="submit">Добавить</button>
+</form>
+
+<hr />
+
+<div *ngFor="let task of tasks; let i = index">
+  <p>
+    <strong>{{ task.title }}</strong><br />
+    {{ task.description || '—' }}<br />
+    Статус: {{ task.status ? 'Выполнена' : 'Не выполнена' }}
+  </p>
+  <button (click)="deleteTask(task.id)">Удалить</button>
+  <button [routerLink]="['/tasks', task.id]">Подробнее</button>
+  <hr />
+</div>
